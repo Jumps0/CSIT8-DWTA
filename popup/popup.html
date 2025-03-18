@@ -1,27 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Comptabile" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ad Information Extension</title>
-  <link rel ="stylesheet" href="bulma.min.css"/>
-</head>
-<body>
-  <div class="container m-3">
-    <h1 class="title">Ad Info Extension</h1>
-    <p>Explanation Text.</p>
-  </div>
+<html>
+  <head>
+    <title>Ad Information Extension</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Comptabile" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="popup.js" defer></script>
+    <link rel="stylesheet" href="bulma.min.css" />
+    <style>
+      body {
+        width: 200px;
+        height: 400px;
+        padding: 10px;
+      }
+      input {
+        width: 90%;
+        margin-bottom: 5px;
+      }
+      button {
+        width: 100%;
+        margin: 5px 0;
+        padding: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Manage Cookies for Ads</h3>
 
-  <!-- Button Containers -->
-  <div class="container m-3">
-    <button id="buttonGenerate" class="button is-success is-fullwidth">Generate</button>
-  </div>
-  <div class="container m-3">
-    <button id="buttonClear" class="button is-danger is-fullwidth">Clear</button>
-  </div>
-</body>
+    <label>Cookie Name:</label>
+    <input type="text" id="cookieName" placeholder="Enter Cookie Name" />
 
-<script src="popup.js"></script>
+    <label>Cookie Value:</label>
+    <input type="text" id="cookieValue" placeholder="Enter Cookie Value" />
 
+    <div class="container m-3">
+      <button id="addCookie" class="button is-success is-fullwidth">
+        Add Cookie
+      </button>
+    </div>
+    <div class="container m-3">
+      <button id="clearCookies" class="button is-danger is-fullwidth">
+        Clear Cookies
+      </button>
+    </div>
+
+    <div class="container m-3">
+      <button id="showCookies" class="button is-info is-fullwidth">
+        Show Current Cookies
+      </button>
+    </div>
+
+    <ul id="cookieList"></ul>
+  </body>
 </html>
+
