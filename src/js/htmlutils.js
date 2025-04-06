@@ -216,7 +216,7 @@ let htmlUtils = {
   <a href="" class="removeOrigin">&#10006</a>
   ${htmlUtils.getToggleHtml(fqdn, action, blockedFpScripts)}
   <a href="" class="honeybadgerPowered tooltip" title="${undo_arrow_tooltip}"></a>
-  <p style="color:rgb(238, 255, 0);"><b>This is some text which provides additional information.</b></p>
+  <p style="color:rgb(255, 145, 0);"><b>This is some text which provides additional information.</b></p>
 </div>
       `.trim();
     };

@@ -15,7 +15,9 @@
   "incognito": "spanning",
   "permissions": [
     "<all_urls>",
+    "activeTab",
     "alarms",
+    "notifications",
     "privacy",
     "storage",
     "tabs",

@@ -1165,6 +1165,46 @@ Badger.prototype = {
     }
 
     chrome.browserAction.setIcon({tabId: tab_id, path: iconFilename});
+  },
+
+  shownotifier: function(message, tab_id){
+    if (!document.getElementById('modal-test-container')) {
+      // Generate random number if 'found' isn't set
+      const found = self.getTrackerCount(tab_id);
+      
+  
+      // Inject modal HTML
+      const modalContainer = document.createElement('div');
+      modalContainer.id = 'modal-test-container';
+      
+      // Fetch modal HTML
+      fetch(chrome.runtime.getURL('skin/modal.html'))
+        .then(response => response.text())
+        .then(html => {
+          // Replace placeholder with the found value
+          const updatedHtml = html.replace('{{FOUND}}', found);
+          modalContainer.innerHTML = updatedHtml;
+          
+          // Inject CSS
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = chrome.runtime.getURL('skin/modal.css');
+          modalContainer.appendChild(link);
+          
+          // Add to document
+          document.body.appendChild(modalContainer);
+          
+          // Auto-remove after 5 seconds
+          setTimeout(() => {
+            modalContainer.style.opacity = '0';
+            setTimeout(() => {
+              if (document.body.contains(modalContainer)) {
+                document.body.removeChild(modalContainer);
+              }
+            }, 300); // Match this with CSS transition time
+          }, 5000);
+        });
+    }
   }
 
 };
@@ -1177,6 +1217,7 @@ function startBackgroundListeners() {
       badger.updateIcon(tab.id, tab.url);
       badger.updateBadge(tabId);
     }
+    openNotifier(tab);
   });
 
   // Update icon if a tab is replaced or loaded from cache
@@ -1192,6 +1233,26 @@ function startBackgroundListeners() {
     if (badger.INITIALIZED) {
       badger.updateBadge(activeInfo.tabId);
     }
+  });
+
+  chrome.browserAction.onClicked.addListener(openNotifier);
+
+  function openNotifier(tab){
+    // Execute notifier script in the current tab
+    //debugNotification('test', 'test');
+    //chrome.tabs.executeScript(tab.id, {
+    //  file: 'js/contentscripts/notifier.js'
+    //});
+    badger.shownotifier('test notification message', tab.id);
+  }
+}
+
+function debugNotification(title, message){
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icons/badger-128.png',
+    title: title,
+    message: message
   });
 }
 
