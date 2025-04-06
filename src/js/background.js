@@ -1170,16 +1170,20 @@ Badger.prototype = {
   shownotifier: function(message, tab_id){
     if (!document.getElementById('modal-test-container')) {
       // Generate random number if 'found' isn't set
-      const found = self.getTrackerCount(tab_id);
-      
-  
+      const found = badger.getTrackerCount(tab_id);
+
       // Inject modal HTML
       const modalContainer = document.createElement('div');
       modalContainer.id = 'modal-test-container';
       
       // Fetch modal HTML
-      fetch(chrome.runtime.getURL('skin/modal.html'))
-        .then(response => response.text())
+      let url = chrome.runtime.getURL("/skin/notifier.html");
+
+      fetch(url)
+        .then(response => {
+          // When the page is loaded convert it to text
+          return response.text()
+        })
         .then(html => {
           // Replace placeholder with the found value
           const updatedHtml = html.replace('{{FOUND}}', found);
@@ -1188,7 +1192,7 @@ Badger.prototype = {
           // Inject CSS
           const link = document.createElement('link');
           link.rel = 'stylesheet';
-          link.href = chrome.runtime.getURL('skin/modal.css');
+          link.href = chrome.runtime.getURL("/skin/notifier.css");
           modalContainer.appendChild(link);
           
           // Add to document
