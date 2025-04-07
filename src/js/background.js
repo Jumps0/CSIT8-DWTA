@@ -962,7 +962,7 @@ Badger.prototype = {
             const style = document.createElement('style');
             style.textContent = \`
               .modal-test {
-                display: none;
+               
                 position: fixed;
                 top: 10px;
                 right: 10px;
@@ -1002,20 +1002,13 @@ Badger.prototype = {
             modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">${count} ${message}</div></div>';
             document.body.appendChild(modal);
       
-            // Make the notifier visible
-            modal.style.display = 'block';
-            modal.style.opacity = '1';
-
-            // Auto-remove after 5 seconds
-            /* (NOT WORKING)
-            setTimeout(() => {
-              modal.style.opacity = '0';
-              setTimeout(() => {
-                modal.style.display = 'none';
-              }, 300);
-            }, 5000);
-            });
-            */
+             // Fade out and remove after 5 seconds
+        setTimeout(() => {
+          modal.style.opacity = '0';
+          setTimeout(() => {
+            modal.remove();
+          }, 300);
+        }, 5000);
 
           })();
         `
