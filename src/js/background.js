@@ -938,7 +938,21 @@ Badger.prototype = {
         return;
       }
 
-      chrome.tabs.executeScript(tab_id, {
+      chrome.browserAction.setBadgeBackgroundColor({tabId: tab_id, color: "#ec9329"});
+      chrome.browserAction.setBadgeText({tabId: tab_id, text: count + ""});
+
+      // Show the modal notifier
+      self.showNotifier(' Trackers Detected. See BadgerInfo++ for details.', tab_id);
+      //self.debugNotification('test', count.toString());
+    });
+  },
+
+  showNotifier: function(message, tab_id){
+    let count = badger.getTrackerCount(tab_id);
+
+    //debugNotification('notification', count.toString());
+
+    chrome.tabs.executeScript(tab_id, {
         code: `
           (function () {
             // Cleanup if already exists
@@ -985,27 +999,41 @@ Badger.prototype = {
       
             const modal = document.createElement('div');
             modal.className = 'modal-test';
-            modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">Trackers Detected: ${count}</div></div>';
+            modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">${count} ${message}</div></div>';
             document.body.appendChild(modal);
       
-            // Detect when user's mouse is near top-right corner
-            document.addEventListener('mousemove', function (e) {
-              if (e.clientX > window.innerWidth - 300 && e.clientY < 70) {
-                modal.style.display = 'block';
-                modal.style.opacity = '1';
-              } else {
-                modal.style.opacity = '0';
-                setTimeout(() => {
-                  modal.style.display = 'none';
-                }, 300);
-              }
+            // Make the notifier visible
+            modal.style.display = 'block';
+            modal.style.opacity = '1';
+
+            // Auto-remove after 5 seconds
+            /* (NOT WORKING)
+            setTimeout(() => {
+              modal.style.opacity = '0';
+              setTimeout(() => {
+                modal.style.display = 'none';
+              }, 300);
+            }, 5000);
             });
+            */
+
           })();
         `
       });
+  },
 
-      chrome.browserAction.setBadgeBackgroundColor({tabId: tab_id, color: "#ec9329"});
-      chrome.browserAction.setBadgeText({tabId: tab_id, text: count + ""});
+  /**
+   * A debug method which shows a chrome/windows notification. Very annoying.
+   * 
+   * @param {String} title of the notification 
+   * @param {String} message that the notification displays
+   */
+  debugNotification: function(title, message){
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icons/badger-128.png',
+      title: title,
+      message: message
     });
   },
 
@@ -1231,52 +1259,7 @@ Badger.prototype = {
     }
 
     chrome.browserAction.setIcon({tabId: tab_id, path: iconFilename});
-  },
-
-  shownotifier: function(message, tab_id){
-    if (!document.getElementById('modal-test-container')) {
-      // Generate random number if 'found' isn't set
-      const found = badger.getTrackerCount(tab_id);
-
-      // Inject modal HTML
-      const modalContainer = document.createElement('div');
-      modalContainer.id = 'modal-test-container';
-      
-      // Fetch modal HTML
-      let url = chrome.runtime.getURL("/skin/notifier.html");
-
-      fetch(url)
-        .then(response => {
-          // When the page is loaded convert it to text
-          return response.text()
-        })
-        .then(html => {
-          // Replace placeholder with the found value
-          const updatedHtml = html.replace('{{FOUND}}', found);
-          modalContainer.innerHTML = updatedHtml;
-          
-          // Inject CSS
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = chrome.runtime.getURL("/skin/notifier.css");
-          modalContainer.appendChild(link);
-          
-          // Add to document
-          document.body.appendChild(modalContainer);
-          
-          // Auto-remove after 5 seconds
-          setTimeout(() => {
-            modalContainer.style.opacity = '0';
-            setTimeout(() => {
-              if (document.body.contains(modalContainer)) {
-                document.body.removeChild(modalContainer);
-              }
-            }, 300); // Match this with CSS transition time
-          }, 5000);
-        });
-    }
   }
-
 };
 
 /**************************** Listeners ****************************/
@@ -1287,7 +1270,7 @@ function startBackgroundListeners() {
       badger.updateIcon(tab.id, tab.url);
       badger.updateBadge(tabId);
     }
-    openNotifier(tab);
+    //openNotifier(tab);
   });
 
   // Update icon if a tab is replaced or loaded from cache
@@ -1303,26 +1286,6 @@ function startBackgroundListeners() {
     if (badger.INITIALIZED) {
       badger.updateBadge(activeInfo.tabId);
     }
-  });
-
-  chrome.browserAction.onClicked.addListener(openNotifier);
-
-  function openNotifier(tab){
-    // Execute notifier script in the current tab
-    //debugNotification('test', 'test');
-    //chrome.tabs.executeScript(tab.id, {
-    //  file: 'js/contentscripts/notifier.js'
-    //});
-    badger.shownotifier('test notification message', tab.id);
-  }
-}
-
-function debugNotification(title, message){
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icons/badger-128.png',
-    title: title,
-    message: message
   });
 }
 
