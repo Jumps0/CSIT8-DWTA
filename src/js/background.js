@@ -942,15 +942,23 @@ Badger.prototype = {
       chrome.browserAction.setBadgeText({tabId: tab_id, text: count + ""});
 
       // Show the modal notifier
-      self.showNotifier(' Trackers Detected. See BadgerInfo++ for details.', tab_id);
-      //self.debugNotification('test', count.toString());
+      self.showNotifier(tab_id);
     });
   },
 
-  showNotifier: function(message, tab_id){
+  showNotifier: function(tab_id){
     let count = badger.getTrackerCount(tab_id);
 
-    //debugNotification('notification', count.toString());
+    // Assemble the default message, need to use different wording for 1 or more trackers.
+    // ' Trackers Detected. See BadgerInfo++ for details.'
+    let message = count.toString();
+    if(count == 1){
+      message += ' tracker ';
+    }
+    else{
+      message += ' trackers ';
+    }
+    message += 'detected. See BadgerInfo++ for details.';
 
     chrome.tabs.executeScript(tab_id, {
         code: `
@@ -966,7 +974,7 @@ Badger.prototype = {
                 position: fixed;
                 top: 10px;
                 right: 10px;
-                width: 200px;
+                width: 300px;
                 background: #4CAF50;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -999,16 +1007,16 @@ Badger.prototype = {
       
             const modal = document.createElement('div');
             modal.className = 'modal-test';
-            modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">${count} ${message}</div></div>';
+            modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">${message}</div></div>';
             document.body.appendChild(modal);
       
-             // Fade out and remove after 5 seconds
-        setTimeout(() => {
-          modal.style.opacity = '0';
-          setTimeout(() => {
-            modal.remove();
-          }, 300);
-        }, 5000);
+            // Fade out and remove after 5 seconds
+            setTimeout(() => {
+              modal.style.opacity = '0';
+              setTimeout(() => {
+                modal.remove();
+              }, 300);
+            }, 5000);
 
           })();
         `
