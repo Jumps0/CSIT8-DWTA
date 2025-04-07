@@ -938,6 +938,72 @@ Badger.prototype = {
         return;
       }
 
+      chrome.tabs.executeScript(tab_id, {
+        code: `
+          (function () {
+            // Cleanup if already exists
+            const existingModal = document.querySelector('.modal-test');
+            if (existingModal) existingModal.remove();
+      
+            const style = document.createElement('style');
+            style.textContent = \`
+              .modal-test {
+                display: none;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 200px;
+                background: #4CAF50;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 999999;
+                font-family: Arial, sans-serif;
+                border: 1px solid #388E3C;
+                animation: modal-test-fadein 0.3s;
+                color: white;
+                transition: opacity 0.3s ease;
+              }
+              .modal-test-content {
+                padding: 10px;
+              }
+              .modal-test-message {
+                font-size: 14px;
+                font-weight: bold;
+              }
+              @keyframes modal-test-fadein {
+                from {
+                  opacity: 0;
+                  transform: translateY(-20px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            \`;
+            document.head.appendChild(style);
+      
+            const modal = document.createElement('div');
+            modal.className = 'modal-test';
+            modal.innerHTML = '<div class="modal-test-content"><div class="modal-test-message">Trackers Detected: ${count}</div></div>';
+            document.body.appendChild(modal);
+      
+            // Detect when user's mouse is near top-right corner
+            document.addEventListener('mousemove', function (e) {
+              if (e.clientX > window.innerWidth - 300 && e.clientY < 70) {
+                modal.style.display = 'block';
+                modal.style.opacity = '1';
+              } else {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                  modal.style.display = 'none';
+                }, 300);
+              }
+            });
+          })();
+        `
+      });
+
       chrome.browserAction.setBadgeBackgroundColor({tabId: tab_id, color: "#ec9329"});
       chrome.browserAction.setBadgeText({tabId: tab_id, text: count + ""});
     });
