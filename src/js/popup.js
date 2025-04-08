@@ -557,6 +557,7 @@ function revertDomainControl(event) {
  * Tooltip that explains how to enable signing into websites with Google.
  */
 function createBreakageNote(domain, i18n_message_key) {
+  /* !! DISABLED FOR BADGERINFO++
   let $slider_allow = $(`#blockedResourcesInner label[for="allow-${domain.replace(/\./g, '-')}"]`);
 
   // first remove the Allow tooltip so that future tooltipster calls
@@ -590,6 +591,7 @@ function createBreakageNote(domain, i18n_message_key) {
   if (POPUP_DATA.settings.seenComic && !POPUP_DATA.showLearningPrompt && !POPUP_DATA.criticalError) {
     $slider_allow.tooltipster('show');
   }
+  */
 }
 
 /**

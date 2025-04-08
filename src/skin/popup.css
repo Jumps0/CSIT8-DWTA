@@ -345,7 +345,7 @@ body#main #pbInstructions a:hover, #firstparty-protections-container a:hover, #d
 #siteControls, #report-controls {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
 }
 .pbButton {
