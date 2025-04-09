@@ -207,6 +207,10 @@ let htmlUtils = {
       // construct HTML for domain
       let domain_tooltip = htmlUtils.getActionDescription(action, fqdn, blockedFpScripts);
 
+      // Explanation string for this specific tracker, where `fqdn` is the KEY, and the VALUE will be accessed from the internal dictionary.
+      let url_explanation = "UNSET EXPLANATION.";
+
+
       return `
 <div class="${classes.join(' ')}" data-origin="${fqdn}">
   <div class="origin" role="heading" aria-level="4">
@@ -216,7 +220,7 @@ let htmlUtils = {
   <a href="" class="removeOrigin">&#10006</a>
   ${htmlUtils.getToggleHtml(fqdn, action, blockedFpScripts)}
   <a href="" class="honeybadgerPowered tooltip" title="${undo_arrow_tooltip}"></a>
-  <p style="color:rgb(255, 145, 0);"><b>This is some text which provides additional information.</b></p>
+  <p style="color:rgb(115, 137, 196);"><b>${url_explanation}</b></p>
 </div>
       `.trim();
     };
