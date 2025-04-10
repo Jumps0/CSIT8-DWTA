@@ -207,8 +207,20 @@ let htmlUtils = {
       // construct HTML for domain
       let domain_tooltip = htmlUtils.getActionDescription(action, fqdn, blockedFpScripts);
 
+      // !! EXPLANATIONS DICTIONARY !!
+      const explanationsDict = {
+        'securepubads.g.doubleclick.net': 'EXPLANATION1',
+        'pagead2.googlesyndication.com': 'EXPLANATION2',
+        'accounts.google.com': 'EXPLANATION3',
+        'cdn.cookielaw.org': 'EXPLANATION4',
+        'www.googletagmanager.com': 'EXPLANATION5',
+        'fonts.gstatic.com': 'EXPLANATION6',
+        'geolocation.onetrust.com': 'EXPLANATION7',
+        'unpkg.com': 'EXPLANATION8',
+      };
+
       // Explanation string for this specific tracker, where `fqdn` is the KEY, and the VALUE will be accessed from the internal dictionary.
-      let url_explanation = "UNSET EXPLANATION.";
+      let url_explanation = explanationsDict[fqdn] || "No explanation available.";
 
 
       return `
