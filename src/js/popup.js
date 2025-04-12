@@ -96,6 +96,8 @@ function showNagMaybe() {
   }
 
   function _showNag() {
+    _setSurveyVariant(); // Take the opportunity to set the variant style.
+
     $nag.show();
     $outer.show();
     // Attach event listeners
@@ -110,6 +112,46 @@ function showNagMaybe() {
       _setSeenComic(() => {
         window.close();
       });
+    });
+  }
+
+  function _setSurveyVariant(){
+    // TODO: Pick survey vairant here. Randomly?
+
+    // Testing implementation below, assuming 3 levels.
+    // Using random selection
+    let variant = Math.floor(Math.random() * 3) + 1;
+    // The colors
+    let color1 = 'rgb(255, 209, 247)';
+    let color2 = 'rgb(184, 209, 255)';
+    let color3 = 'rgb(255, 219, 208)';
+    let chosenColor;
+    if(variant == 1){
+      chosenColor = color1;
+    }
+    else if(variant == 2){
+      chosenColor = color2;
+    }
+    else if(variant == 3){
+      chosenColor = color3;
+    }
+
+    // Update the variable in `background.js`
+    chrome.runtime.sendMessage({
+      action: "setVariant",
+      value: variant
+    });
+
+    // And update the color in `background.js`
+    chrome.runtime.sendMessage({
+      action: "setVariantColor",
+      value: chosenColor
+    })
+
+    // Then update the color in the popup
+    console.log(chosenColor);
+    $('h2').css({
+      'color': chosenColor
     });
   }
 

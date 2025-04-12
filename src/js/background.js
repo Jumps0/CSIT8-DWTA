@@ -1271,7 +1271,6 @@ function startBackgroundListeners() {
       badger.updateIcon(tab.id, tab.url);
       badger.updateBadge(tabId);
     }
-    //openNotifier(tab);
   });
 
   // Update icon if a tab is replaced or loaded from cache
@@ -1288,6 +1287,23 @@ function startBackgroundListeners() {
       badger.updateBadge(activeInfo.tabId);
     }
   });
+
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === "getVariant") {
+      sendResponse({value: badger.surveyVariant});
+    }
+    if (request.action === "getVariantColor") {
+      sendResponse({value: badger.surveyVariantColor});
+    }
+    if (request.action === "setVariant") {
+      badger.surveyVariant = request.value;
+    }
+    if (request.action === "setVariantColor") {
+      badger.surveyVariantColor = request.value;
+    }
+  });
 }
 
+let surveyVariant = 0; // Current explanations variant of this extension, where 0 = unset.
+let surveyVariantColor = 'rgb(255, 255, 255)'; // Current variant color
 let badger = window.badger = new Badger(document.location.pathname == "/tests/index.html");
