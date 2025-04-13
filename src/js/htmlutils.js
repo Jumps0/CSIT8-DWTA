@@ -222,6 +222,12 @@ let htmlUtils = {
       // Explanation string for this specific tracker, where `fqdn` is the KEY, and the VALUE will be accessed from the internal dictionary.
       let url_explanation = explanationsDict[fqdn] || "No explanation available.";
 
+      // We should only actually show the explanation if we are on the appropriate variant.
+      // In this instance, `2`
+      let variant = -1;
+      chrome.runtime.sendMessage({action: "getVariant"}, function(response) {
+        variant = response.value;
+      });
 
       return `
 <div class="${classes.join(' ')}" data-origin="${fqdn}">
@@ -232,7 +238,7 @@ let htmlUtils = {
   <a href="" class="removeOrigin">&#10006</a>
   ${htmlUtils.getToggleHtml(fqdn, action, blockedFpScripts)}
   <a href="" class="honeybadgerPowered tooltip" title="${undo_arrow_tooltip}"></a>
-  <p style="color:rgb(115, 137, 196);"><b>${url_explanation}</b></p>
+  ${variant === 2 ? `<p style="color:rgb(115, 137, 196);"><b>${url_explanation}</b></p>` : ''} <!-- Only show explanation on specific variant(s) -->
 </div>
       `.trim();
     };

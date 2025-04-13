@@ -149,7 +149,6 @@ function showNagMaybe() {
     })
 
     // Then update the color in the popup
-    console.log(chosenColor);
     $('h2').css({
       'color': chosenColor
     });
@@ -645,6 +644,18 @@ function createBreakageNote(domain, i18n_message_key) {
  */
 function refreshPopup() {
   window.SLIDERS_DONE = false;
+
+  // Set the logo's color
+  let chosenColor;
+  chrome.runtime.sendMessage({action: "getVariantColor"}, function(response) {
+    chosenColor = response.value;
+  });
+  
+  $('h2').css({
+    'color': chosenColor
+  });
+
+  console.log(chosenColor);
 
   // must be a special browser page,
   if (POPUP_DATA.noTabData) {

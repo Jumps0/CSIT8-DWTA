@@ -40,6 +40,8 @@ function Badger(from_qunit) {
   self.startTime = new Date();
   self.isFirstRun = false;
   self.isUpdate = false;
+  self.surveyVariant = 0; // Current explanations variant of this extension, where 0 = unset.
+  self.surveyVariantColor = 'rgb(255, 255, 255)'; // Current variant color
 
   (function () {
     let manifestJson = chrome.runtime.getManifest();
@@ -1290,20 +1292,21 @@ function startBackgroundListeners() {
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === "getVariant") {
-      sendResponse({value: badger.surveyVariant});
+      sendResponse({value: self.surveyVariant});
     }
     if (request.action === "getVariantColor") {
-      sendResponse({value: badger.surveyVariantColor});
+      sendResponse({value: self.surveyVariantColor});
     }
     if (request.action === "setVariant") {
-      badger.surveyVariant = request.value;
+      self.surveyVariant = request.value;
     }
     if (request.action === "setVariantColor") {
-      badger.surveyVariantColor = request.value;
+      self.surveyVariantColor = request.value;
+    }
+    if (request.action === "debugNotification") {
+      badger.debugNotification(request.value, request.value);
     }
   });
 }
 
-let surveyVariant = 0; // Current explanations variant of this extension, where 0 = unset.
-let surveyVariantColor = 'rgb(255, 255, 255)'; // Current variant color
 let badger = window.badger = new Badger(document.location.pathname == "/tests/index.html");
