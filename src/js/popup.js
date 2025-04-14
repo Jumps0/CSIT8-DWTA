@@ -115,7 +115,7 @@ function showNagMaybe() {
     });
   }
 
-  function _setSurveyVariant(){
+ /* function _setSurveyVariant(){
     // TODO: Pick survey vairant here. Randomly?
 
     // Testing implementation below, assuming 3 levels.
@@ -153,7 +153,39 @@ function showNagMaybe() {
       'color': chosenColor
     });
   }
-
+*/
+  // Try to store value
+    chrome.storage.local.get(["surveyVariant", "surveyVariantColor"], (result) => {
+    if (result.surveyVariant && result.surveyVariantColor) {
+      console.log("[INFO] Using saved variant:", result.surveyVariant);
+      $('h2').css({ color: result.surveyVariantColor });
+    } else {
+      // Choose random variant
+      const variant = Math.floor(Math.random() * 3) + 1;
+      let color;
+      if (variant === 1) color = 'rgb(212, 18, 180)';
+      else if (variant === 2) color = 'rgb(26, 72, 157)';
+      else color = 'rgb(221, 72, 27)';
+  
+      console.log("[INFO] New variant:", variant);
+      console.log("[INFO] New color:", color);
+  
+      // Save directly to storage
+      chrome.storage.local.set({
+        surveyVariant: variant,
+        surveyVariantColor: color
+      }, () => {
+        console.log("[INFO] Saved to storage.");
+        $('h2').css({ color: color });
+      });
+    }
+  });
+  
+  chrome.runtime.sendMessage({ action: "getVariantColor" }, (response) => {
+    console.log("Variant color is:", response.value);
+    $('h2').css({ color: response.value });
+  });
+  
   function _showError(error_text) {
     $('#instruction-text').hide();
 
