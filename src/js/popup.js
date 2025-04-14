@@ -115,76 +115,35 @@ function showNagMaybe() {
     });
   }
 
- /* function _setSurveyVariant(){
-    // TODO: Pick survey vairant here. Randomly?
-
-    // Testing implementation below, assuming 3 levels.
-    // Using random selection
-    let variant = Math.floor(Math.random() * 3) + 1;
-    // The colors
-    let color1 = 'rgb(255, 209, 247)';
-    let color2 = 'rgb(184, 209, 255)';
-    let color3 = 'rgb(255, 219, 208)';
-    let chosenColor;
-    if(variant == 1){
-      chosenColor = color1;
-    }
-    else if(variant == 2){
-      chosenColor = color2;
-    }
-    else if(variant == 3){
-      chosenColor = color3;
-    }
-
-    // Update the variable in `background.js`
-    chrome.runtime.sendMessage({
-      action: "setVariant",
-      value: variant
-    });
-
-    // And update the color in `background.js`
-    chrome.runtime.sendMessage({
-      action: "setVariantColor",
-      value: chosenColor
-    })
-
-    // Then update the color in the popup
-    $('h2').css({
-      'color': chosenColor
-    });
-  }
-*/
-  // Try to store value
+ function _setSurveyVariant(){
+    // Try to store value
     chrome.storage.local.get(["surveyVariant", "surveyVariantColor"], (result) => {
-    if (result.surveyVariant && result.surveyVariantColor) {
-      console.log("[INFO] Using saved variant:", result.surveyVariant);
-      $('h2').css({ color: result.surveyVariantColor });
-    } else {
-      // Choose random variant
-      const variant = Math.floor(Math.random() * 3) + 1;
-      let color;
-      if (variant === 1) color = 'rgb(212, 18, 180)';
-      else if (variant === 2) color = 'rgb(26, 72, 157)';
-      else color = 'rgb(221, 72, 27)';
-  
-      console.log("[INFO] New variant:", variant);
-      console.log("[INFO] New color:", color);
-  
-      // Save directly to storage
-      chrome.storage.local.set({
-        surveyVariant: variant,
-        surveyVariantColor: color
-      }, () => {
-        console.log("[INFO] Saved to storage.");
-        $('h2').css({ color: color });
-      });
-    }
-  });
-  
-  chrome.runtime.sendMessage({ action: "getVariantColor" }, (response) => {
-    console.log("Variant color is:", response.value);
-    $('h2').css({ color: response.value });
-  });
+      if (result.surveyVariant && result.surveyVariantColor) {
+        console.log("[INFO] Using saved variant:", result.surveyVariant);
+        $('h2').css({ color: result.surveyVariantColor });
+      } else {
+        // Choose random variant
+        const variant = Math.floor(Math.random() * 3) + 1;
+        let color;
+        if (variant === 1) color = 'rgb(212, 18, 180)';
+        else if (variant === 2) color = 'rgb(26, 72, 157)';
+        else color = 'rgb(221, 72, 27)';
+    
+        console.log("[INFO] New variant:", variant);
+        console.log("[INFO] New color:", color);
+    
+        // Save directly to storage
+        chrome.storage.local.set({
+          surveyVariant: variant,
+          surveyVariantColor: color
+        }, () => {
+          console.log("[INFO] Saved to storage.");
+          $('h2').css({ color: color });
+        });
+      }
+    });
+ }
+
   
   function _showError(error_text) {
     $('#instruction-text').hide();
@@ -679,15 +638,14 @@ function refreshPopup() {
 
   // Set the logo's color
   let chosenColor;
-  chrome.runtime.sendMessage({action: "getVariantColor"}, function(response) {
-    chosenColor = response.value;
-  });
-  
-  $('h2').css({
-    'color': chosenColor
-  });
+  chrome.storage.local.get(["surveyVariant", "surveyVariantColor"], (result) => {
+    chosenColor = result.surveyVariantColor;
+    console.log("[INFO] Using saved variant:", result.surveyVariantColor);
 
-  console.log(chosenColor);
+    $('h2').css({
+      'color': chosenColor
+    });
+  });
 
   // must be a special browser page,
   if (POPUP_DATA.noTabData) {
