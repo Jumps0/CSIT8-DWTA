@@ -280,7 +280,7 @@ function init() {
           e.preventDefault();
           openPage(chrome.runtime.getURL("/skin/options.html"));
         });
-        $("#help").on("click", function (e) {
+        $("#help").on("click", function (e) { // Help button
           e.preventDefault();
           openPage(this.getAttribute('href'));
         });
