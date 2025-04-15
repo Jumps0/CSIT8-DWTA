@@ -224,10 +224,9 @@ let htmlUtils = {
 
       // We should only actually show the explanation if we are on the appropriate variant.
       // In this instance, `2`
-      let variant = -1;
-      chrome.runtime.sendMessage({action: "getVariant"}, function(response) {
-        variant = response.value;
-      });
+      const bgBadger = chrome.extension.getBackgroundPage().badger;
+      let variant = bgBadger.globals.surveyVariant;
+      console.log("[INFO] Running with variant: ", variant);
 
       return `
 <div class="${classes.join(' ')}" data-origin="${fqdn}">

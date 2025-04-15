@@ -116,32 +116,27 @@ function showNagMaybe() {
   }
 
  function _setSurveyVariant(){
-    // Try to store value
-    chrome.storage.local.get(["surveyVariant", "surveyVariantColor"], (result) => {
-      if (result.surveyVariant && result.surveyVariantColor) {
-        console.log("[INFO] Using saved variant:", result.surveyVariant);
-        $('h2').css({ color: result.surveyVariantColor });
-      } else {
-        // Choose random variant
-        const variant = Math.floor(Math.random() * 3) + 1;
-        let color;
-        if (variant === 1) color = 'rgb(212, 18, 180)';
-        else if (variant === 2) color = 'rgb(26, 72, 157)';
-        else color = 'rgb(221, 72, 27)';
-    
-        console.log("[INFO] New variant:", variant);
-        console.log("[INFO] New color:", color);
-    
-        // Save directly to storage
-        chrome.storage.local.set({
-          surveyVariant: variant,
-          surveyVariantColor: color
-        }, () => {
-          console.log("[INFO] Saved to storage.");
-          $('h2').css({ color: color });
-        });
-      }
-    });
+    // Is the color unset?  
+    const bgBadger = chrome.extension.getBackgroundPage().badger;
+    let variantColor = bgBadger.globals.surveyVariantColor;
+    let variant = bgBadger.globals.surveyVariant;
+
+    if(variant == -1){ // Default state, needs to be set
+      // Choose random variant
+      variant = Math.floor(Math.random() * 3) + 1;
+      if (variant === 1) variantColor = 'rgb(212, 18, 180)';
+      else if (variant === 2) variantColor = 'rgb(26, 72, 157)';
+      else variantColor = 'rgb(221, 72, 27)';
+      console.log("[INFO] Picked variant: ", variant);
+    }
+
+    // Set the color
+    $('h2').css({ color: variantColor });
+
+    // And save the information
+    bgBadger.globals.surveyVariant = variant;
+    bgBadger.globals.surveyVariantColor = variantColor;
+    console.log("[INFO] Saved variant: ", bgBadger.globals.surveyVariant);
  }
 
   
@@ -637,14 +632,12 @@ function refreshPopup() {
   window.SLIDERS_DONE = false;
 
   // Set the logo's color
-  let chosenColor;
-  chrome.storage.local.get(["surveyVariant", "surveyVariantColor"], (result) => {
-    chosenColor = result.surveyVariantColor;
-    console.log("[INFO] Using saved variant:", result.surveyVariantColor);
+  const bgBadger = chrome.extension.getBackgroundPage().badger;
+  let chosenColor = bgBadger.globals.surveyVariantColor;
+  console.log("[INFO] Using saved variant:", chosenColor);
 
-    $('h2').css({
-      'color': chosenColor
-    });
+  $('h2').css({
+    'color': chosenColor
   });
 
   // must be a special browser page,
