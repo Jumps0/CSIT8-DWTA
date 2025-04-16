@@ -148,7 +148,7 @@ function showNagMaybe() {
     $('#error-text').show().find('a')
       .addClass('cta-button')
       .css({
-        borderRadius: '3px',
+        borderRadius: '13px',
         display: 'inline-block',
         padding: '5px',
         textDecoration: 'none',
@@ -254,6 +254,7 @@ function init() {
     chrome.i18n.getMessage("version", chrome.runtime.getManifest().version)
   );
 
+  
   // add event listeners for click-to-expand blocked resources popup section
   $('#tracker-list-header').on('click', toggleBlockedResourcesHandler);
 
@@ -271,7 +272,7 @@ function init() {
     $('#youtube-message').html(chrome.i18n.getMessage("popup_info_youtube") + " " + chrome.i18n.getMessage('learn_more_link', ['<a target=_blank href="https://privacybadger.org/#Is-Privacy-Badger-breaking-YouTube">privacybadger.org</a>']));
     $("#youtube-message-container").show();
   }
-
+  
   // improve on Firefox's built-in options opening logic
   if (typeof browser == "object" && typeof browser.runtime.getBrowserInfo == "function") {
     browser.runtime.getBrowserInfo().then(function (info) {
@@ -280,10 +281,10 @@ function init() {
           e.preventDefault();
           openPage(chrome.runtime.getURL("/skin/options.html"));
         });
-        $("#help").on("click", function (e) { // Help button
+       /* $("#help").on("click", function (e) {
           e.preventDefault();
           openPage(this.getAttribute('href'));
-        });
+        });*/
       }
     });
   }
@@ -339,7 +340,6 @@ function openPage(url) {
     window.close();
   });
 }
-
 function clearSavedErrorText() {
   chrome.runtime.sendMessage({
     type: 'removeErrorText',
