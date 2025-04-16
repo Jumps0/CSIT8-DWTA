@@ -193,6 +193,25 @@ a.removeOrigin:hover {
     margin-inline-end: 3px;
 }
 
+#learn-more-link { /* Learn more link */
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+
+#learn-more-link a {
+    color: rgb(128, 128, 255);
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#learn-more-link a:hover {
+    color: rgb(0, 0, 255);
+    text-decoration: underline;
+}
+
 /* body#main to avoid applying this to options page */
 body#main #blockedResourcesContainer, #special-browser-page, #disabled-site-message, #first-run-page {
     flex: 1;
