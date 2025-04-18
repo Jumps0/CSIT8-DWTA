@@ -21,60 +21,60 @@ document.addEventListener("DOMContentLoaded", async function () {
     // fetch isn't an option, so we go with absolute brimstone instead.
     const data = [
       {
-        "url": "https://example.com/page1",
-        "group": "Group A",
-        "info1": "Value1",
-        "info2": "Value2",
-        "info3": "Value3",
-        "info4": "Value4"
+        "url": "adobetarget.data.adobedc.net",
+        "group": "Adobe",
+        "info1": "Purpose: Website personalization and A/B testing",
+        "info2": "Purpose: Analytics / Personalization",
+        "info3": "This tracker is part of Adobe Target, a tool that helps websites test and personalize content for visitors. It monitors user behavior to deliver tailored experiences, such as showing different versions of a webpage to see which performs better.",
+        "info4": "Common sites: Large e-commerce platforms, media outlets, and enterprise websites",
       },
       {
-        "url": "https://test.org/demo",
-        "group": "Group B",
-        "info1": "UNSET",
-        "info2": "UNSET",
-        "info3": "UNSET",
-        "info4": "UNSET"
+        "url": "static.cloudflareinsights.com",
+        "group": "Cloudflare",
+        "info1": "Purpose: Website performance analytics",
+        "info2": "Category: Analytics / Performance Monitoring",
+        "info3": "This tracker is part of Cloudflare Web Analytics, a privacy-focused tool that helps website owners understand site performance and visitor behavior without using cookies or collecting personal data.",
+        "info4": "Common sites: Websites using Cloudflare services or seeking privacy-centric analytics solutions"
       },
       {
-          "url": "https://test.org/demo",
-          "group": "Group B",
-          "info1": "UNSET",
-          "info2": "UNSET",
-          "info3": "UNSET",
-          "info4": "UNSET"
+          "url": "cdn.cookielaw.org",
+          "group": "OneTrust",
+          "info1": "Purpose: Cookie consent and regulatory compliance",
+          "info2": "Category: Compliance / Consent Management",
+          "info3": "This tracker is part of OneTrust's cookie consent management platform, helping websites comply with privacy laws by displaying cookie banners and storing user consent preferences.",
+          "info4": "Common sites: Websites implementing GDPR or CCPA compliance banners"
       },
       {
-          "url": "https://test.org/demo",
-          "group": "Group C",
-          "info1": "UNSET",
-          "info2": "UNSET",
-          "info3": "UNSET",
-          "info4": "UNSET"
+          "url": "dpm.demdex.net",
+          "group": "Adobe",
+          "info1": "Purpose: User identification and cross-site tracking for targeted advertising",
+          "info2": "Category: Advertising / Data Management Platform",
+          "info3": "This tracker is part of Adobe Audience Manager. It helps websites identify and track visitors across different sites by assigning a unique ID to each user. This enables personalized advertising and content based on user behavior.",
+          "info4": "Common sites: Major advertisers, publishers, and marketing platforms"
       },
       {
-          "url": "https://test.org/demo",
-          "group": "Group C",
-          "info1": "UNSET",
-          "info2": "UNSET",
-          "info3": "UNSET",
-          "info4": "UNSET"
+          "url": "www.googletagmanager.com",
+          "group": "Google",
+          "info1": "Purpose: Tag management and script loading",
+          "info2": "Category: Utility / Analytics Management",
+          "info3": "This tracker is part of Google Tag Manager, a tool that helps website owners manage and deploy marketing and analytics tags without modifying the website's code. It allows for efficient tracking of user interactions and site performance.",
+          "info4": "Common sites: Almost every commercial and organizational site"
       },
       {
-          "url": "https://test.org/demo",
-          "group": "Group A",
-          "info1": "UNSET",
-          "info2": "UNSET",
-          "info3": "UNSET",
-          "info4": "UNSET"
+          "url": "js-agent.newrelic.com",
+          "group": "New Relic",
+          "info1": "Purpose: Website performance monitoring",
+          "info2": "Category: Analytics / Performance Monitoring",
+          "info3": "This tracker is part of New Relic's Browser Agent, which helps website owners monitor and improve site performance by collecting data on page load times, user interactions, and errors.",
+          "info4": "Common sites: Websites using New Relic for performance monitoring"
       },
       {
-          "url": "https://test.org/demo",
-          "group": "Group B",
-          "info1": "UNSET",
-          "info2": "UNSET",
-          "info3": "UNSET",
-          "info4": "UNSET"
+          "url": "www.youtube.com",
+          "group": "Google",
+          "info1": "Purpose: Video hosting and user interaction tracking",
+          "info2": "Category: Media / Advertising",
+          "info3": "This tracker is part of YouTube's video embedding service. When a YouTube video is embedded on a website, this tracker can collect data on user interactions with the video, such as views, likes, and watch time, even if the video isn't played. This helps YouTube gather analytics and serve personalized ads.",
+          "info4": "Common sites: News outlets, blogs, educational platforms, and marketing pages with embedded YouTube videos"
       }
     ]
 
