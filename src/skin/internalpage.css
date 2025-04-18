@@ -40,7 +40,7 @@
 }
 .info-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     margin: auto;
     font-family: sans-serif;
   }
@@ -56,6 +56,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   
+ 
   .icon {
     font-size: 30px;
     margin-right: 16px;
@@ -83,10 +84,23 @@
     color: #007bff;
     font-size: 14px;
     text-decoration: none;
+    cursor: pointer;
   }
   
   .read-more:hover {
     text-decoration: underline;
+  }
+  .extra-text {
+    display: none; /* Initially hide the extra content */
+    overflow: hidden;
+    font-size: 14px;
+    color: #666;
+  }
+  
+ 
+  
+  .read-more.expanded {
+    color: rgb(34, 167, 244); /* You can change the color once expanded */
   }
   
   .tags {
