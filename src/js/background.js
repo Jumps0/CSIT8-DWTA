@@ -1311,7 +1311,7 @@ function startBackgroundListeners() {
 let badger = window.badger = new Badger(document.location.pathname == "/tests/index.html");
 
 badger.globals = {
-  surveyVariant: -1, // The display "variant" the extension is running on
+  surveyVariant: /*-1*/3, // The display "variant" the extension is running on
   surveyVariantColor: 'rgb(105, 105, 105)', // Unique variant color
   trackerURLs: [{}] // Contains all trackers found since the install
 }
