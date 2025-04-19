@@ -130,6 +130,9 @@ function showNagMaybe() {
       console.log("[INFO] Picked variant: ", variant);
     }
 
+    // DEBUG TESTING, REMOVE THIS LATER
+    variant = 3;
+
     // Set the color
     $('h2').css({ color: variantColor });
 
