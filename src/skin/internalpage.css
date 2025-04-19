@@ -63,13 +63,19 @@
 
 /* Node styles */
 .node {
+  stroke: #fff;
   stroke-width: 1.5px;
+  filter: url(#glow-filter); /* Apply the glow effect */
   cursor: pointer;
 }
 
 .node:hover {
   stroke-width: 2px;
   filter: brightness(1.2);
+}
+
+.node:hover + .info-display {
+  visibility: visible;
 }
 
 .node-label {
@@ -79,9 +85,16 @@
   user-select: none;
 }
 
+.node-glow {
+  fill: none;
+  stroke-width: 25; /* Glow size */
+  stroke-opacity: 0.3; /* Glow transparency */
+  pointer-events: none;
+}
+
 /* Group labels */
 .group-label {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: bold;
   pointer-events: none;
   fill: white;
@@ -111,6 +124,7 @@
   border-radius: 5px;
   visibility: hidden;
   z-index: 10;
+  pointer-events: none;
 }
 
 .header{

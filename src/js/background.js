@@ -1288,6 +1288,7 @@ function startBackgroundListeners() {
     }
   });
 
+  // NOTE: Most of these are no longer used
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === "getVariant") {
       sendResponse({value: self.surveyVariant});
@@ -1310,6 +1311,7 @@ function startBackgroundListeners() {
 let badger = window.badger = new Badger(document.location.pathname == "/tests/index.html");
 
 badger.globals = {
-  surveyVariant: -1,
-  surveyVariantColor: 'rgb(105, 105, 105)'
+  surveyVariant: /*-1*/3, // The display "variant" the extension is running on
+  surveyVariantColor: 'rgb(105, 105, 105)', // Unique variant color
+  trackerURLs: [{}] // Contains all trackers found since the install
 }

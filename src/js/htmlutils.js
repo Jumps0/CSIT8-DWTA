@@ -228,6 +228,11 @@ let htmlUtils = {
       let variant = bgBadger.globals.surveyVariant;
       console.log("[INFO] Running with variant: ", variant);
 
+      // !! Save the URL for later use in the visualization (if we are on the correct variant) !!
+      if(variant == 3){
+        bgBadger.globals.trackerURLs.appendChild(fqdn);
+      }
+
       return `
 <div class="${classes.join(' ')}" data-origin="${fqdn}">
   <div class="origin" role="heading" aria-level="4">

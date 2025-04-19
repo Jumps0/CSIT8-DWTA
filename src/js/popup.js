@@ -634,11 +634,24 @@ function refreshPopup() {
   // Set the logo's color
   const bgBadger = chrome.extension.getBackgroundPage().badger;
   let chosenColor = bgBadger.globals.surveyVariantColor;
+  let variant = bgBadger.globals.surveyVariant;
   console.log("[INFO] Using saved variant:", chosenColor);
 
   $('h2').css({
     'color': chosenColor
   });
+
+  // Get container element
+  const container = document.querySelector('.learnmore-container');
+
+  // Based on variant, show "Learn More" link or not
+  if(variant > 1){
+    container.style.display = 'flex'; // Make it visible
+  }
+  else{
+    // Hide it
+    container.style.display = 'none';
+  }
 
   // must be a special browser page,
   if (POPUP_DATA.noTabData) {

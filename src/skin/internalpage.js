@@ -18,73 +18,111 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
 
-    // fetch isn't an option, so we go with absolute brimstone instead.
-    const data = [
-      {
-        "url": "adobetarget.data.adobedc.net",
-        "group": "Adobe",
-        "info1": "Purpose: Website personalization and A/B testing",
-        "info2": "Purpose: Analytics / Personalization",
-        "info3": "This tracker is part of Adobe Target, a tool that helps websites test and personalize content for visitors. It monitors user behavior to deliver tailored experiences, such as showing different versions of a webpage to see which performs better.",
-        "info4": "Common sites: Large e-commerce platforms, media outlets, and enterprise websites",
-      },
-      {
-        "url": "static.cloudflareinsights.com",
-        "group": "Cloudflare",
-        "info1": "Purpose: Website performance analytics",
-        "info2": "Category: Analytics / Performance Monitoring",
-        "info3": "This tracker is part of Cloudflare Web Analytics, a privacy-focused tool that helps website owners understand site performance and visitor behavior without using cookies or collecting personal data.",
-        "info4": "Common sites: Websites using Cloudflare services or seeking privacy-centric analytics solutions"
-      },
-      {
-          "url": "cdn.cookielaw.org",
-          "group": "OneTrust",
-          "info1": "Purpose: Cookie consent and regulatory compliance",
-          "info2": "Category: Compliance / Consent Management",
-          "info3": "This tracker is part of OneTrust's cookie consent management platform, helping websites comply with privacy laws by displaying cookie banners and storing user consent preferences.",
-          "info4": "Common sites: Websites implementing GDPR or CCPA compliance banners"
-      },
-      {
-          "url": "dpm.demdex.net",
-          "group": "Adobe",
-          "info1": "Purpose: User identification and cross-site tracking for targeted advertising",
-          "info2": "Category: Advertising / Data Management Platform",
-          "info3": "This tracker is part of Adobe Audience Manager. It helps websites identify and track visitors across different sites by assigning a unique ID to each user. This enables personalized advertising and content based on user behavior.",
-          "info4": "Common sites: Major advertisers, publishers, and marketing platforms"
-      },
-      {
-          "url": "www.googletagmanager.com",
-          "group": "Google",
-          "info1": "Purpose: Tag management and script loading",
-          "info2": "Category: Utility / Analytics Management",
-          "info3": "This tracker is part of Google Tag Manager, a tool that helps website owners manage and deploy marketing and analytics tags without modifying the website's code. It allows for efficient tracking of user interactions and site performance.",
-          "info4": "Common sites: Almost every commercial and organizational site"
-      },
-      {
-          "url": "js-agent.newrelic.com",
-          "group": "New Relic",
-          "info1": "Purpose: Website performance monitoring",
-          "info2": "Category: Analytics / Performance Monitoring",
-          "info3": "This tracker is part of New Relic's Browser Agent, which helps website owners monitor and improve site performance by collecting data on page load times, user interactions, and errors.",
-          "info4": "Common sites: Websites using New Relic for performance monitoring"
-      },
-      {
-          "url": "www.youtube.com",
-          "group": "Google",
-          "info1": "Purpose: Video hosting and user interaction tracking",
-          "info2": "Category: Media / Advertising",
-          "info3": "This tracker is part of YouTube's video embedding service. When a YouTube video is embedded on a website, this tracker can collect data on user interactions with the video, such as views, likes, and watch time, even if the video isn't played. This helps YouTube gather analytics and serve personalized ads.",
-          "info4": "Common sites: News outlets, blogs, educational platforms, and marketing pages with embedded YouTube videos"
-      }
-    ]
 
-    try {
-      // Create the visualization
-      createVisualization(data);
-    } catch (error) {
-      console.error('Error:', error);
-      const visualization = document.getElementById('visualization');
-      visualization.innerHTML = `<p style="color: red; padding: 10px;">Error loading visualization: ${error.message}</p>`;
+    // Only do visualization on correct variant!
+    const bgBadger = chrome.extension.getBackgroundPage().badger;
+    let variant = bgBadger.globals.surveyVariant;
+
+    // Get container element
+    const container = document.querySelector('.visualization-container');
+
+    if(variant == 3){
+      // Load and show visualization
+      container.style.display = 'flex'; // Make sure it's visible
+
+      // fetch isn't an option, so we go with absolute brimstone instead.
+      const data = [
+        {
+          "url": "adobetarget.data.adobedc.net",
+          "group": "Adobe",
+          "info1": "Website personalization and A/B testing",
+          "info2": "Analytics / Personalization",
+          "info3": "This tracker is part of Adobe Target, a tool that helps websites test and personalize content for visitors. It monitors user behavior to deliver tailored experiences, such as showing different versions of a webpage to see which performs better.",
+          "info4": "Large e-commerce platforms, media outlets, and enterprise websites",
+        },
+        {
+          "url": "static.cloudflareinsights.com",
+          "group": "Cloudflare",
+          "info1": "Website performance analytics",
+          "info2": "Analytics / Performance Monitoring",
+          "info3": "This tracker is part of Cloudflare Web Analytics, a privacy-focused tool that helps website owners understand site performance and visitor behavior without using cookies or collecting personal data.",
+          "info4": "Websites using Cloudflare services or seeking privacy-centric analytics solutions"
+        },
+        {
+            "url": "cdn.cookielaw.org",
+            "group": "OneTrust",
+            "info1": "Cookie consent and regulatory compliance",
+            "info2": "Compliance / Consent Management",
+            "info3": "This tracker is part of OneTrust's cookie consent management platform, helping websites comply with privacy laws by displaying cookie banners and storing user consent preferences.",
+            "info4": "Websites implementing GDPR or CCPA compliance banners"
+        },
+        {
+            "url": "dpm.demdex.net",
+            "group": "Adobe",
+            "info1": "User identification and cross-site tracking for targeted advertising",
+            "info2": "Advertising / Data Management Platform",
+            "info3": "This tracker is part of Adobe Audience Manager. It helps websites identify and track visitors across different sites by assigning a unique ID to each user. This enables personalized advertising and content based on user behavior.",
+            "info4": "Major advertisers, publishers, and marketing platforms"
+        },
+        {
+            "url": "www.googletagmanager.com",
+            "group": "Google",
+            "info1": "Tag management and script loading",
+            "info2": "Utility / Analytics Management",
+            "info3": "This tracker is part of Google Tag Manager, a tool that helps website owners manage and deploy marketing and analytics tags without modifying the website's code. It allows for efficient tracking of user interactions and site performance.",
+            "info4": "Almost every commercial and organizational site"
+        },
+        {
+            "url": "js-agent.newrelic.com",
+            "group": "New Relic",
+            "info1": "Website performance monitoring",
+            "info2": "Analytics / Performance Monitoring",
+            "info3": "This tracker is part of New Relic's Browser Agent, which helps website owners monitor and improve site performance by collecting data on page load times, user interactions, and errors.",
+            "info4": "Websites using New Relic for performance monitoring"
+        },
+        {
+            "url": "www.youtube.com",
+            "group": "Google",
+            "info1": "Video hosting and user interaction tracking",
+            "info2": "Media / Advertising",
+            "info3": "This tracker is part of YouTube's video embedding service. When a YouTube video is embedded on a website, this tracker can collect data on user interactions with the video, such as views, likes, and watch time, even if the video isn't played. This helps YouTube gather analytics and serve personalized ads.",
+            "info4": "News outlets, blogs, educational platforms, and marketing pages with embedded YouTube videos"
+        }
+      ]
+
+      // And get the trackers list as well
+      let trackers = bgBadger.globals.trackerURLs;
+      const filteredData = processTrackerData(data, trackers);
+
+      try {
+        // Must have atleast 1 tracker in the list
+        if(/*filteredData.length > 0*/ true){
+          // Create the visualization
+          createVisualization(/*filteredData*/ data);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        const visualization = document.getElementById('visualization');
+        visualization.innerHTML = `<p style="color: red; padding: 10px;">Error loading visualization: ${error.message}</p>`;
+      }
+    }
+    else{
+      // Hide the entire visualization
+      container.style.display = 'none';
+    }
+
+    // Function that sets up data to be visualized
+    function processTrackerData(rawData, trackers) {
+      // Create Set for O(1) lookups and automatic deduplication
+      const trackerSet = new Set(trackers);
+      const seenUrls = new Set();
+      
+      return rawData.filter(item => {
+        // Only include if URL is in trackers and we haven't seen it before
+        const shouldInclude = trackerSet.has(item.url) && !seenUrls.has(item.url);
+        if (shouldInclude) seenUrls.add(item.url);
+        return shouldInclude;
+      });
     }
 
     function createVisualization(data) {
@@ -234,6 +272,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         .append("g")
         .attr("class", "node-group");
     
+      // Add glow effect first (so it appears behind the node)
+      nodeElements.append("circle")
+        .attr("class", "node-glow")
+        .attr("r", node_size) // Same size as node
+        .attr("fill", "none")
+        .attr("stroke", d => d.color)
+        .attr("stroke-width", 15) // Glow size
+        .attr("stroke-opacity", 0.3); // Glow transparency
+
       // Add circles
       nodeElements.append("circle")
         .attr("class", "node")
@@ -249,11 +296,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           infoDisplay.style("visibility", "visible")
             .html(`
               <div><strong>URL:</strong> ${d.url}</div>
-              <div><strong>Group:</strong> ${d.group}</div>
-              <div><strong>Info 1:</strong> ${d.info1}</div>
-              <div><strong>Info 2:</strong> ${d.info2}</div>
-              <div><strong>Info 3:</strong> ${d.info3}</div>
-              <div><strong>Info 4:</strong> ${d.info4}</div>
+              <div><strong>Operator:</strong> ${d.group}</div>
+              <div><strong>Purpose:</strong> ${d.info1}</div>
+              <div><strong>Category:</strong> ${d.info2}</div>
+              <div><strong>Description:</strong> ${d.info3}</div>
+              <div><strong>Seen on:</strong> ${d.info4}</div>
             `);
         })
         .on("mouseout", function() {

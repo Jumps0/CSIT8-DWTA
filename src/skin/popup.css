@@ -193,6 +193,12 @@ a.removeOrigin:hover {
     margin-inline-end: 3px;
 }
 
+.learnmore-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #learn-more-link { /* Learn more link */
     margin: 0 auto;
     width: 50%;
