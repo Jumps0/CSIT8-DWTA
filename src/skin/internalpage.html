@@ -74,15 +74,22 @@
           <br />
           <br />
           <div class="extra-text" id="extraText">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <p><b>Web trackers</b> are technologies embedded into websites usually invisible to the user that collect data about your online activity. They are typically pieces of code (like JavaScript, cookies, or tracking pixels) loaded from third-party servers.</p>
+    
+            <p>These tools <b>monitor and record:</b></p>
+            <ul>
+                <li>Pages you visit</li>
+                <li>How long you stay on each page</li>
+                <li>What you click or scroll through</li>
+                <li>Your IP address, browser type, and device specs</li>
+                <li>Sometimes geolocation, email, or login IDs</li>
+            </ul>
+            
+            <p>In short, <b>they build a behavioral profile</b> based on your digital actions—usually without your explicit consent.</p>
+            
+            <div class="citation">
+              <b>Source:</b> Electronic Frontier Foundation (EFF), <a href="https://www.eff.org/wp/behind-the-one-way-mirror" target="_blank" rel="noopener noreferrer">"Behind the One-Way Mirror"</a></p>
+            </div>
           </div>
         </div>
         <a href="#" class="read-more">Read more</a>
@@ -96,15 +103,35 @@
           <br />
           <br />
           <div class="extra-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <p>Trackers exist because <b>user data is extremely valuable.</b> Here's why they do it:</p>
+
+            <h2>a. Behavioral Advertising</h2>
+            <p>Most tracking is driven by the advertising industry. Advertisers want to understand:</p>
+            <ul>
+                <li>Your interests and habits</li>
+                <li>What you're likely to click or buy</li>
+                <li>When you're most active online</li>
+            </ul>
+            <p>Using this, they deliver <b>targeted ads,</b> increasing the chance you'll convert into a customer.</p>
+            <div class="citation">
+                <b>Citation:</b> Turow, J. (2012). <em>The Daily You: How the New Advertising Industry Is Defining Your Identity and Your Worth</em>
+            </div>
+
+            <h2>b. Analytics and Optimization</h2>
+            <p>Websites use trackers to measure:</p>
+            <ul>
+                <li>How many people visit</li>
+                <li>Which pages perform best</li>
+                <li>How users interact with content</li>
+            </ul>
+            <p>This is often done via tools like Google Analytics, though it comes at the cost of sharing your data with third parties.</p>
+
+            <h2>c. Data Brokerage</h2>
+            <p>Some trackers collect your data not just for the site you're on, but to <b>resell it to data brokers.</b> 
+              These companies aggregate data from many sources to build extremely detailed consumer profiles.</p>
+            <div class="citation">
+                <b>Source:</b> Mozilla Foundation, <a href="https://foundation.mozilla.org/en/privacynotincluded/articles/you-are-not-the-product-you-are-the-lab-rat" target="_blank" rel="noopener noreferrer">"You Are Not the Product. You Are the Lab Rat."</a>
+            </div>
           </div>
         </div>
         <a href="#" class="read-more">Read more</a>
@@ -122,15 +149,76 @@
           <br />
           <br />
           <div class="extra-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <p>There are multiple methods used to track users:</p>
+
+            <section class="tracking-method">
+                <h2>A. Cookies</h2>
+                <div class="method-details">
+                    <p>Especially <b>third-party cookies</b>, which track you across multiple sites. For example, a cookie from doubleclick.net can follow you from news.com to shop.com.</p>
+                    <ul>
+                      <li><b>Set by:</b> Advertisers, analytics providers</li>
+                      <li><b>Used for:</b> Long-term user recognition</li>
+                      <li><b>Persistence:</b> Can last months or even years</li>
+                    </ul>
+                    <div class="citation">
+                        <b>Source:</b> <a href="https://cookiepedia.co.uk/" target="_blank" rel="noopener noreferrer">Cookiepedia</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tracking-method">
+                <h2>B. Tracking Pixels / Beacons</h2>
+                <div class="method-details">
+                    <p>Tiny, invisible images (often 1x1 pixel) embedded in a site or email. When loaded, they notify the tracker that you've viewed a specific page or email.</p>
+                    <div class="example"><b>Example URL:</b> https://tracker.example.com/pixel.gif?uid=1234</div>
+                </div>
+            </section>
+
+            <section class="tracking-method">
+                <h2>C. JavaScript-based Trackers</h2>
+                <div class="method-details">
+                    <p>Scripts that collect in-depth data from your device or browser, like clicks, scrolls, screen size, and even typing behavior.</p>
+                    <div class="detail-item">
+                        <b>Common source:</b>
+                        <span>Google Tag Manager, Hotjar, Facebook Pixel</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tracking-method">
+                <h2>D. Device Fingerprinting</h2>
+                <div class="method-details">
+                    <p>An advanced method that creates a unique ID based on your browser and hardware configuration—no cookies required.</p>
+                    <div class="detail-item">
+                        <b>Fingerprinting vectors:</b>
+                        <ul>
+                            <li>Screen resolution</li>
+                            <li>Browser version</li>
+                            <li>Installed fonts</li>
+                            <li>WebGL rendering</li>
+                            <li>Audio context fingerprint</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Tool example:</span>
+                        <span>FingerprintJS</span>
+                    </div>
+                    <div class="citation">
+                        Technical resource: <a href="https://panopticlick.eff.org/" target="_blank" rel="noopener noreferrer">EFF's Panopticlick Project</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tracking-method">
+                <h2>E. CNAME Cloaking</h2>
+                <div class="method-details">
+                    <p>A deceptive practice where third-party trackers are masked to appear as first-party resources. This allows them to bypass browser restrictions.</p>
+                    <b>Example: analytics.site.com actually resolves to track.vendor.com</b>
+                    <div class="citation">
+                        <b>Source:</b> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CNAME_cloaking" target="_blank" rel="noopener noreferrer">Mozilla Developer Docs on CNAME Cloaking</a>
+                    </div>
+                </div>
+            </section>
           </div>
         </div>
         <a href="#" class="read-more">Read more</a>
@@ -144,15 +232,71 @@
           <br />
           <br />
           <div class="extra-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <p>It's not easy to completely avoid tracking, but you can <b>greatly reduce your exposure</b> with a few tools and habits.</p>
+
+            <section class="tip-card">
+                <h2>A. Use Privacy-Focused Browsers</h2>
+                <ul>
+                    <li><b>Brave:</b> Blocks most trackers and ads by default</li>
+                    <li><b>Firefox:</b> Has strong Enhanced Tracking Protection</li>
+                    <li><b>Tor Browser:</b> Best for anonymity (but can be slower)</li>
+                </ul>
+                <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" class="source-link" target="_blank" rel="noopener noreferrer">Firefox Guide →</a>
+            </section>
+
+            <section class="tip-card">
+                <h2>B. Install Tracker-Blocking Extensions</h2>
+                <div class="tool-list">
+                  <a href="https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh" target="_blank" rel="noopener noreferrer" class="tool">uBlock Origin</a>
+                  <a href="https://privacybadger.org/" target="_blank" rel="noopener noreferrer" class="tool">Privacy Badger (by EFF)</a>
+                  <a href="https://chromewebstore.google.com/detail/duckduckgo-search-tracker/bkdgflcldnnnapblkhphbgpggdiikppg" target="_blank" rel="noopener noreferrer" class="tool">DuckDuckGo Privacy Essentials</a>
+                </div>
+                <p>These tools detect and block known tracker domains in real-time.</p>
+            </section>
+
+            <section class="tip-card">
+                <h2>C. Use DNS-Based Blockers</h2>
+                <ul>
+                    <li><b>NextDNS</b> or <b>AdGuard DNS</b> can block trackers at the network level</li>
+                    <li><b>Pi-hole</b> is a local DNS sinkhole for advanced users</li>
+                </ul>
+                <div>
+                    <a href="https://nextdns.io/" class="source-link" target="_blank" rel="noopener noreferrer">NextDNS →</a>
+                    <a href="https://docs.pi-hole.net/" class="source-link" target="_blank" rel="noopener noreferrer">Pi-hole Docs →</a>
+                </div>
+            </section>
+
+            <section class="tip-card">
+                <h2>D. Regularly Clear Cookies and Local Storage</h2>
+                <p>Especially important if you're using a browser that allows trackers by default.</p>
+                <ul>
+                    <li>Also clear <b>IndexedDB</b> and <b>LocalStorage</b>, which trackers use as backups</li>
+                </ul>
+            </section>
+
+            <section class="tip-card">
+                <h2>E. Disable JavaScript (if possible)</h2>
+                <p>Many trackers rely on JavaScript. Disabling it can break trackers—but also many websites.</p>
+                <p>Use extensions like <b>NoScript</b> if you need fine-grained control.</p>
+            </section>
+
+            <section class="tip-card">
+                <h2>F. Limit Social Media Widgets</h2>
+                <p>Avoid clicking embedded Like or Share buttons, which often track you even if you don't interact with them. These can load scripts from:</p>
+                <div class="tool-list">
+                    <span class="domain-example">facebook.net</span>
+                    <span class="domain-example">twitter.com</span>
+                    <span class="domain-example">linkedin.com</span>
+                </div>
+            </section>
+
+            <section class="tip-card">
+                <h2>G. Use a VPN</h2>
+                <p>While a VPN doesn't stop tracking directly, <b>it obscures your IP address</b> and location, making fingerprinting harder.</p>
+                <div class="warning">
+                    <b>Reminder:</b> VPNs don't stop JavaScript trackers, cookies, or fingerprinting—they only mask IP-level identifiers.
+                </div>
+            </section>
           </div>
         </div>
         <a href="#" class="read-more">Read more</a>
