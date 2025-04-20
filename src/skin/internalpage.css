@@ -183,6 +183,9 @@
     font-size: 14px;
     text-decoration: none;
     cursor: pointer;
+    white-space: nowrap;         
+  display: inline-block;       
+  word-break: normal;      
   }
   
   .read-more:hover {
@@ -193,6 +196,9 @@
     overflow: hidden;
     font-size: 14px;
     color: #666;
+    padding-right: 20px;  
+    margin-right: 25px;   
+    max-width: 90%;   
   }
   
  
