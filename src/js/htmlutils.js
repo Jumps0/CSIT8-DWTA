@@ -230,7 +230,7 @@ let htmlUtils = {
 
       // !! Save the URL for later use in the visualization (if we are on the correct variant) !!
       if(variant == 3){
-        bgBadger.globals.trackerURLs.appendChild(fqdn);
+         bgBadger.globals.trackerURLs.push(fqdn);
       }
 
       return `
