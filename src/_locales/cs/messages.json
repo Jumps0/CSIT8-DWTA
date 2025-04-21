@@ -66,7 +66,7 @@
         }
     },
     "popup_instructions": {
-        "message": "$COUNT$ potential $LINK_START$trackers$LINK_END$ blocked",
+        "message": "$COUNT$ potential $LINK_START$trackers$LINK_END$ blocked (click to expand)",
         "description": "Popup message shown when at least one tracker was blocked.",
         "placeholders": {
             "count": {
