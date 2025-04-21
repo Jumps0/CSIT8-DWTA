@@ -121,7 +121,7 @@ function showNagMaybe() {
     let variantColor = bgBadger.globals.surveyVariantColor;
     let variant = bgBadger.globals.surveyVariant;
 
-    if(/*variant == -1*/ true){ // Default state, needs to be set
+    if(variant == -1){ // Default state, needs to be set
       // Choose random variant
       variant = Math.floor(Math.random() * 3) + 1;
       if (variant === 1) variantColor = 'rgb(212, 18, 180)';
@@ -129,10 +129,7 @@ function showNagMaybe() {
       else variantColor = 'rgb(221, 72, 27)';
       console.log("[INFO] Picked variant: ", variant);
     }
-
-    // DEBUG TESTING, REMOVE THIS LATER
-    variant = 3;
-
+    
     // Set the color
     $('h2').css({ color: variantColor });
 
