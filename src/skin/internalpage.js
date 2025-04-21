@@ -1176,9 +1176,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       try {
         // Must have atleast 1 tracker in the list
-        if(/*filteredData.length > 0*/ true){
+        if(filteredData.length > 0){
           // Create the visualization
-          createVisualization(/*filteredData*/ data);
+          createVisualization(filteredData);
         }
       } catch (error) {
         console.error('Error:', error);
