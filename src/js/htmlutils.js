@@ -368,7 +368,7 @@ let htmlUtils = {
       }
 
       return `
-<div class="${classes.join(' ')}" data-origin="${fqdn}">
+<div class="${classes.join(' ')}" data-origin="${fqdn}" style="position: relative; overflow: auto; height: 100%">
   <div class="origin" role="heading" aria-level="4">
     <span class="ui-icon ui-icon-alert tooltip breakage-warning" title="${breakage_warning_tooltip}"></span>
     <span class="origin-inner tooltip" title="${domain_tooltip}">${dnt_html}${shield_icon}${fqdn}</span>    <!-- ${fqdn} IS THE KEY -->
@@ -376,7 +376,16 @@ let htmlUtils = {
   <a href="" class="removeOrigin">&#10006</a>
   ${htmlUtils.getToggleHtml(fqdn, action, blockedFpScripts)}
   <a href="" class="honeybadgerPowered tooltip" title="${undo_arrow_tooltip}"></a>
-  ${variant > 1 ? `<p style="color:rgb(115, 137, 196);"><b>${url_explanation}</b></p>` : ''} <!-- Only show explanation on specific variant(s) -->
+  ${variant > 1 ? `  <!-- Only show explanation on specific variant(s) -->
+    <p style="
+      color: rgb(115, 137, 196);
+      margin: 0.5em 0;
+      display: block;
+      clear: both;
+    ">
+      <b>${url_explanation}</b>
+    </p>
+  ` : ''}
 </div>
       `.trim();
     };

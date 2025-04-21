@@ -129,7 +129,7 @@ function showNagMaybe() {
       else variantColor = 'rgb(221, 72, 27)';
       console.log("[INFO] Picked variant: ", variant);
     }
-    
+
     // Set the color
     $('h2').css({ color: variantColor });
 
