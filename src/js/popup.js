@@ -98,6 +98,7 @@ function showNagMaybe() {
   function _showNag() {
     _setSurveyVariant(); // Take the opportunity to set the variant style.
 
+    /*
     $nag.show();
     $outer.show();
     // Attach event listeners
@@ -113,6 +114,7 @@ function showNagMaybe() {
         window.close();
       });
     });
+    */
   }
 
  function _setSurveyVariant(){

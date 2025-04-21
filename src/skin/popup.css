@@ -573,6 +573,7 @@ a.overlay-close:hover {
 .toggle-header-icon {
     margin-inline-end: auto;
     padding: 0 4px;
+    color: #F6C324 !important;
 }
 .ui-icon.ui-icon-caret-d, .ui-icon.ui-icon-caret-u {
     font-size: 18px;
