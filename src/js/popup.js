@@ -96,7 +96,7 @@ function showNagMaybe() {
   }
 
   function _showNag() {
-    _setSurveyVariant(); // Take the opportunity to set the variant style.
+    
 
     /*
     $nag.show();
@@ -117,31 +117,6 @@ function showNagMaybe() {
     */
   }
 
- function _setSurveyVariant(){
-    // Is the color unset?  
-    const bgBadger = chrome.extension.getBackgroundPage().badger;
-    let variantColor = bgBadger.globals.surveyVariantColor;
-    let variant = bgBadger.globals.surveyVariant;
-
-    if(variant == -1){ // Default state, needs to be set
-      // Choose random variant (15% chance for 1, 40% chance for 2, 45% chance for 3)
-      variant = Math.random() < 0.15 ? 1 : Math.random() < 0.4/0.85 ? 2 : 3;
-      if (variant === 1) variantColor = 'rgb(212, 18, 180)';
-      else if (variant === 2) variantColor = 'rgb(26, 72, 157)';
-      else variantColor = 'rgb(221, 72, 27)';
-      console.log("[INFO] Picked variant: ", variant);
-    }
-
-    // Set the color
-    $('h2').css({ color: variantColor });
-
-    // And save the information
-    bgBadger.globals.surveyVariant = variant;
-    bgBadger.globals.surveyVariantColor = variantColor;
-    console.log("[INFO] Saved variant: ", bgBadger.globals.surveyVariant);
- }
-
-  
   function _showError(error_text) {
     $('#instruction-text').hide();
 
