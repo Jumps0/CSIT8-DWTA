@@ -1082,7 +1082,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
         {
           "url": "www.recaptcha.net",
-          "group": "Google LLC",
+          "group": "Google",
           "info1": "Bot detection",
           "info2": "Security",
           "info3": "Google’s alternative domain for reCAPTCHA, used to detect abusive traffic.",

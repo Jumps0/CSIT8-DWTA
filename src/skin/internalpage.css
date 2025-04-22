@@ -59,6 +59,7 @@
   font-weight: bold;
   z-index: 10;
   pointer-events: none;
+  margin-bottom: 5px;
 }
 
 /* Node styles */
