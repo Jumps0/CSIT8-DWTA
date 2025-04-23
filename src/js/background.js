@@ -776,13 +776,9 @@ Badger.prototype = {
     let variantColor = bgBadger.globals.surveyVariantColor;
     let variant = bgBadger.globals.surveyVariant;
 
-    if(variant == -1){ // Default state, needs to be set
-      // Choose random variant (15% chance for 1, 40% chance for 2, 45% chance for 3)
-      variant = Math.random() < 0.15 ? 1 : Math.random() < 0.4/0.85 ? 2 : 3;
-      if (variant === 1) variantColor = 'rgb(212, 18, 180)';
-      else if (variant === 2) variantColor = 'rgb(26, 72, 157)';
-      else variantColor = 'rgb(221, 72, 27)';
-      console.log("[INFO] Picked variant: ", variant);
+    if(variant == -1){ // Default state, needs to be set (at 1)
+      variant = 1;
+      variantColor = 'rgb(109, 165, 173)';
     }
 
     // And save the information

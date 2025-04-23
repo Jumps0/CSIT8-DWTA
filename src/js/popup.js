@@ -258,10 +258,6 @@ function init() {
           e.preventDefault();
           openPage(chrome.runtime.getURL("/skin/options.html"));
         });
-       /* $("#help").on("click", function (e) {
-          e.preventDefault();
-          openPage(this.getAttribute('href'));
-        });*/
       }
     });
   }
@@ -278,6 +274,53 @@ function init() {
     $("#share-output").select();
     document.execCommand('copy');
     $(this).text(chrome.i18n.getMessage("copy_button_copied"));
+  });
+
+  $("#increase").on("click", function (e) {
+    const bgBadger = chrome.extension.getBackgroundPage().badger;
+    let v = bgBadger.globals.surveyVariant;
+
+    if(v < 3){
+      v++;
+    }
+
+    let newColor;
+
+    if (v === 1) newColor = 'rgb(109, 165, 173)';
+    else if (v === 2) newColor = 'rgb(0, 110, 255)';
+    else if (v === 3) newColor = 'rgb(27, 255, 141)';
+
+    $('h2').css({
+      'color': newColor
+    });
+
+    bgBadger.globals.surveyVariant = v;
+    bgBadger.globals.surveyVariantColor = newColor;
+
+    location.reload(true); // Force reload the page
+  });
+  $("#decrease").on("click", function (e) {
+    const bgBadger = chrome.extension.getBackgroundPage().badger;
+    let v = bgBadger.globals.surveyVariant;
+
+    if(v > 1){
+      v--;
+    }
+
+    let newColor;
+
+    if (v === 1) newColor = 'rgb(109, 165, 173)';
+    else if (v === 2) newColor = 'rgb(0, 110, 255)';
+    else if (v === 3) newColor = 'rgb(27, 255, 141)';
+
+    $('h2').css({
+      'color': newColor
+    });
+
+    bgBadger.globals.surveyVariant = v;
+    bgBadger.globals.surveyVariantColor = newColor;
+
+    location.reload(true); // Force reload the page
   });
 
   $('html').css({
