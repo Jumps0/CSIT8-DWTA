@@ -32,7 +32,6 @@
 .variant-buttons-container{
   width: 100px;
   height: 30px;
-  background-color: rgb(134, 237, 255);
   border: 2px solid black;
   border-radius: 15px;
   position: fixed;
