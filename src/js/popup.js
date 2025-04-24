@@ -280,15 +280,17 @@ function init() {
     const bgBadger = chrome.extension.getBackgroundPage().badger;
     let v = bgBadger.globals.surveyVariant;
 
-    if(v < 3){
+    if(v < 3){ // Limit it here since we will only ever see variants 1-3
       v++;
     }
 
     let newColor;
 
     if (v === 1) newColor = 'rgb(109, 165, 173)';
-    else if (v === 2) newColor = 'rgb(0, 110, 255)';
-    else if (v === 3) newColor = 'rgb(27, 255, 141)';
+    else if (v === 2) newColor = 'rgb(0, 238, 255)';
+    else if (v === 3) newColor = 'rgb(0, 68, 255)';
+    else if (v === 4) newColor = 'rgb(67, 255, 161)';
+    else if (v === 5) newColor = 'rgb(9, 255, 0)';
 
     $('h2').css({
       'color': newColor
@@ -310,8 +312,10 @@ function init() {
     let newColor;
 
     if (v === 1) newColor = 'rgb(109, 165, 173)';
-    else if (v === 2) newColor = 'rgb(0, 110, 255)';
-    else if (v === 3) newColor = 'rgb(27, 255, 141)';
+    else if (v === 2) newColor = 'rgb(0, 238, 255)';
+    else if (v === 3) newColor = 'rgb(0, 68, 255)';
+    else if (v === 4) newColor = 'rgb(67, 255, 161)';
+    else if (v === 5) newColor = 'rgb(9, 255, 0)';
 
     $('h2').css({
       'color': newColor
@@ -665,7 +669,7 @@ function refreshPopup() {
   const container = document.querySelector('.learnmore-container');
 
   // Based on variant, show "Learn More" link or not
-  if(variant > 1){
+  if(variant > 2){
     container.style.display = 'flex'; // Make it visible
   }
   else{

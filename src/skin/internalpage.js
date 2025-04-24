@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
+    // Add listener to read more buttons
     const readMoreButtons = document.querySelectorAll(".read-more");
-  
+
     readMoreButtons.forEach((button) => {
       button.addEventListener("click", function (e) {
         e.preventDefault();
@@ -18,15 +19,77 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
 
+    // Add listeners to variant change buttons
+    const increaseVButton = document.querySelector(".increase-button");
+    const decreaseVButton = document.querySelector(".decrease-button");
+    increaseVButton.addEventListener("click", variantIncrease);
+    decreaseVButton.addEventListener("click", variantDecrease);
+
+    function variantIncrease (){
+      const bgBadger = chrome.extension.getBackgroundPage().badger;
+      let v = bgBadger.globals.surveyVariant;
+
+      if(v < 5){
+        v++;
+      }
+
+      let newColor;
+
+      if (v === 1) newColor = 'rgb(109, 165, 173)';
+      else if (v === 2) newColor = 'rgb(0, 238, 255)';
+      else if (v === 3) newColor = 'rgb(0, 68, 255)';
+      else if (v === 4) newColor = 'rgb(67, 255, 161)';
+      else if (v === 5) newColor = 'rgb(9, 255, 0)';
+
+      $('h2').css({
+        'color': newColor
+      });
+
+      bgBadger.globals.surveyVariant = v;
+      bgBadger.globals.surveyVariantColor = newColor;
+
+      location.reload(true); // Force reload the page
+    }
+
+    function variantDecrease(){
+      const bgBadger = chrome.extension.getBackgroundPage().badger;
+      let v = bgBadger.globals.surveyVariant;
+
+      if(v > 3){  // More limited on this page, only 3-5
+        v--;
+      }
+
+      let newColor;
+
+      if (v === 1) newColor = 'rgb(109, 165, 173)';
+      else if (v === 2) newColor = 'rgb(0, 238, 255)';
+      else if (v === 3) newColor = 'rgb(0, 68, 255)';
+      else if (v === 4) newColor = 'rgb(67, 255, 161)';
+      else if (v === 5) newColor = 'rgb(9, 255, 0)';
+
+      $('h2').css({
+        'color': newColor
+      });
+
+      bgBadger.globals.surveyVariant = v;
+      bgBadger.globals.surveyVariantColor = newColor;
+
+      location.reload(true); // Force reload the page
+    }
 
     // Only do visualization on correct variant!
     const bgBadger = chrome.extension.getBackgroundPage().badger;
     let variant = bgBadger.globals.surveyVariant;
 
+    // (also set the logo color while we are here)
+    $('h2').css({
+      'color': bgBadger.globals.surveyVariantColor
+    });
+
     // Get container element
     const container = document.querySelector('.visualization-container');
 
-    if(variant == 3){
+    if(variant > 3){ // Only visible on variants 4 & 5
       // Load and show visualization
       container.style.display = 'flex'; // Make sure it's visible
 
@@ -1189,6 +1252,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     else{
       // Hide the entire visualization
       container.style.display = 'none';
+    }
+
+    // Now handle the text explanation. Should only be visible on 3 or 5
+    const textexpl = document.querySelector('.info-container');
+    if(variant == 3 || variant == 5){
+      textexpl.style.display = 'inherit'; // SHOW
+    }
+    else{
+      textexpl.style.display = 'none'; // HIDE
     }
 
     // Function that sets up data to be visualized

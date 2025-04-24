@@ -357,15 +357,13 @@ let htmlUtils = {
       let url_explanation = explanationsDict[fqdn] || "No explanation available.";
 
       // We should only actually show the explanation if we are on the appropriate variant.
-      // In this instance, `2` or `3`
+      // In this instance, `2` or above
       const bgBadger = chrome.extension.getBackgroundPage().badger;
       let variant = bgBadger.globals.surveyVariant;
       console.log("[INFO] Running with variant: ", variant);
 
-      // !! Save the URL for later use in the visualization (if we are on the correct variant) !!
-      if(variant == 3){
-         bgBadger.globals.trackerURLs.push(fqdn);
-      }
+      // !! Save the URL for later use in the visualization !!
+      bgBadger.globals.trackerURLs.push(fqdn);
 
       return `
 <div class="${classes.join(' ')}" data-origin="${fqdn}" style="position: relative; overflow: auto; height: 100%">
