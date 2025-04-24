@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
 
+    // Providing the current logo color as the background color to the variant buttons container.
+     window.addEventListener("DOMContentLoaded", function () {
+      const bgBadger = chrome.extension.getBackgroundPage().badger;
+      const currentColor = bgBadger.globals.surveyVariantColor;
+    
+      // Set the background color of the variant-buttons-container
+      const container = document.querySelector(".variant-buttons-container");
+      if (container && currentColor) {
+        container.style.backgroundColor = currentColor;
+      }
+    });
+
     // Add listeners to variant change buttons
     const increaseVButton = document.querySelector(".increase-button");
     const decreaseVButton = document.querySelector(".decrease-button");
