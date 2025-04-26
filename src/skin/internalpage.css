@@ -123,7 +123,7 @@
   stroke-opacity: 0.4;
 }
 
-/* Info display */
+/* Node graph tooltip */
 .info-display {
   position: absolute;
   bottom: 5px;
@@ -141,6 +141,78 @@
   visibility: hidden;
   z-index: 10;
   pointer-events: none;
+}
+
+
+.piechart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 100vw;
+}
+
+#piechart {
+  width: 100%;
+  max-width: 900px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  background-color: rgb(41, 41, 41);
+}
+
+.piechart-heading {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+  margin-bottom: 5px;
+}
+
+/* Piechart tooltip */
+.piechart-tooltip {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
+  visibility: hidden;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.piechart-tooltip.active {
+  opacity: 1;
+}
+
+.tooltip-urls {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: center;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.tooltip-urls div {
+  margin-bottom: 4px;
+  word-break: break-all;
+  text-align: center;
 }
 
 .citation {

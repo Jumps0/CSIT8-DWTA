@@ -99,11 +99,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     // Get container element
-    const container = document.querySelector('.visualization-container');
+    const nodegraph = document.querySelector('.visualization-container');
+    const piechart = document.querySelector('.piechart-container');
 
     if(variant > 3){ // Only visible on variants 4 & 5
       // Load and show visualization
-      container.style.display = 'flex'; // Make sure it's visible
+      nodegraph.style.display = 'flex'; // Make sure it's visible
+      piechart.style.display = 'flex'; // Make sure it's visible
 
       // fetch isn't an option, so we go with absolute brimstone instead.
       const data = [
@@ -1254,6 +1256,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if(filteredData.length > 0){
           // Create the visualization
           createVisualization(filteredData);
+          createPiechart(filteredData);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -1263,7 +1266,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     else{
       // Hide the entire visualization
-      container.style.display = 'none';
+      nodegraph.style.display = 'none';
+      piechart.style.display = 'none';
     }
 
     // Now handle the text explanation. Should only be visible on 3 or 5
@@ -1286,6 +1290,25 @@ document.addEventListener("DOMContentLoaded", async function () {
         const shouldInclude = trackerSet.has(item.url) && !seenUrls.has(item.url);
         if (shouldInclude) seenUrls.add(item.url);
         return shouldInclude;
+      });
+    }
+
+    // Process the data to extract and count categories (for piechart visualization)
+    function processCategoryData(data) {
+      const categoryCounts = {};
+      
+      data.forEach(item => {
+          // Split categories by " / " and trim whitespace
+          const categories = item.info2.split('/').map(cat => cat.trim());
+          
+          categories.forEach(cat => {
+              categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+          });
+      });
+      
+      // Convert to array format for D3
+      return Object.entries(categoryCounts).map(([category, count]) => {
+          return { category, count };
       });
     }
 
@@ -1530,6 +1553,144 @@ document.addEventListener("DOMContentLoaded", async function () {
           .attr("x", d => d.x)
           .attr("y", d => d.y - 15);
       });
+    }
+
+    function createPiechart(data){
+
+        function createCategoryMap(data) {
+          const categoryMap = {};
+          
+          data.forEach(item => {
+              const categories = item.info2.split('/').map(cat => cat.trim());
+              
+              categories.forEach(cat => {
+                  if (!categoryMap[cat]) {
+                      categoryMap[cat] = [];
+                  }
+                  categoryMap[cat].push(item);
+              });
+          });
+          
+          return categoryMap;
+        }
+
+        const categoryMap = createCategoryMap(data);
+
+        // Then process for the pie chart counts
+        function processCategoryData(categoryMap) {
+          return Object.entries(categoryMap).map(([category, items]) => {
+            return { category, count: items.length };
+          });
+        }
+
+        const categoryData = processCategoryData(categoryMap);
+
+        // Set up dimensions
+        const width = 900;
+        const height = 400;
+        const adjust = 50;
+        const radius = Math.min(width, height) / 2 - adjust;
+
+        // Create SVG
+        const svg = d3.select("#piechart")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .append("g")
+            .attr("transform", `translate(${(width/2)}, ${height/2})`);
+
+        // Create color scale
+        const color = d3.scaleOrdinal()
+            .domain(categoryData.map(d => d.category))
+            .range(d3.schemeTableau10);
+
+        // Create pie layout
+        const pie = d3.pie()
+            .value(d => d.count)
+            .sort(null);
+
+        // Create arc generators
+        const arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+            
+        const hoverArc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius + 10);
+
+        const labelArc = d3.arc()
+            .outerRadius(radius - 30)
+            .innerRadius(radius - 30);
+
+        // Create arcs
+        const arcs = svg.selectAll(".arc")
+            .data(pie(categoryData))
+            .enter()
+            .append("g")
+            .attr("class", "arc")
+            .attr("opacity", 0.9);
+
+        // Add paths (the actual pie slices)
+        const paths = arcs.append("path")
+            .attr("d", arc)
+            .attr("fill", d => color(d.data.category))
+            .attr("stroke", "white")
+            .attr("stroke-width", 2)
+            .on("mouseover", function(event, d) {
+                // Highlight hovered slice
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr("d", hoverArc)
+                    .attr("opacity", 1);
+                
+                // Dim all other slices
+                paths.filter(arc => arc.data.category !== d.data.category)
+                    .transition()
+                    .duration(200)
+                    .attr("d", arc)
+                    .attr("opacity", 0.5);
+                
+                // Get all URLs for this category
+                const categoryItems = categoryMap[d.data.category];
+                const urlsHtml = categoryItems.map(item => 
+                    `<div>• ${item.url}</div>`
+                ).join('');
+
+                // Update tooltip
+                const tooltip = d3.select(".piechart-tooltip");
+                tooltip.style("visibility", "visible")
+                  .html(`
+                    <div><b>${d.data.category}</b><br></div>
+                    <div>Trackers of this type: ${d.data.count}<br></div>
+                    <div class="tooltip-urls">${urlsHtml}</div>
+                `)
+            })
+            .on("mouseout", function() {
+                // Return all slices to normal
+                paths.transition()
+                    .duration(200)
+                    .attr("d", arc)
+                    .attr("opacity", 1);
+                
+                d3.select(".piechart-tooltip").style("visibility", "hidden");
+            });
+
+        // Add labels with count
+        arcs.append("text")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("dy", "0.35em")
+            .text(d => `${d.data.category} (${d.data.count})`)
+            .style("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .style("fill", "white")
+            .style("pointer-events", "none")
+            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.7)")
+            .style("paint-order", "stroke")
+            .style("z-index: 10", "10")
+            .style("stroke", "rgba(0,0,0,0.5)")
+            .style("stroke-width", "2px");
     }
   });
   
