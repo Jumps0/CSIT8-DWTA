@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
         {
           "url": "cdn.jsdelivr.net",
-          "group": "jsDelivr (sponsored by Cloudflare, Fastly, and others)",
+          "group": "JSDelivr",
           "info1": "Content delivery",
           "info2": "Web Performance / CDN",
           "info3": "A popular open-source content delivery network (CDN) for serving JavaScript libraries and other static assets.",

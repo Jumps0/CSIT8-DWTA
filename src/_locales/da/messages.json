@@ -1,6 +1,6 @@
 {
     "name": {
-        "message": "Privacy Badger",
+        "message": "BadgerInfo++",
         "description": "The name of this extension."
     },
     "description": {
@@ -66,7 +66,7 @@
         }
     },
     "popup_instructions": {
-        "message": "$COUNT$ potentielle $LINK_START$trackere$LINK_END$ blokeret",
+        "message": "$COUNT$ potentielle $LINK_START$trackere$LINK_END$ blokeret (klik for at udvide)",
         "description": "Popup message shown when at least one tracker was blocked.",
         "placeholders": {
             "count": {
@@ -292,15 +292,15 @@
         "description": "Shown in the popup when there is an extension error we want to encourage the user to tell us about."
     },
     "firstRun_title": {
-        "message": "Tak for at installere Privacy Badger!",
+        "message": "Tak for at installere BadgerInfo++ og deltog i dette projekt!",
         "description": "Title and header of the intro page."
     },
     "intro_by_eff": {
-        "message": "Et projekt fra Electronic Frontier Foundation",
+        "message": "Et projekt fra Electronic Frontier Foundation, modificeret af CS-IT8 Gruppe 8",
         "description": "Message in the header of the intro page."
     },
     "intro_welcome": {
-        "message": "Privacy Badger lærer automatisk at blokere usynlige sporinger. Brug et minut på at se hvordan.",
+        "message": "BadgerInfo++ giver forskellige niveauer af information om webtrackere. Fastgør udvidelsen, og besøg en hvilken som helst webside for at komme i gang.",
         "description": "Intro page welcome paragraph."
     },
     "intro_next_button": {
