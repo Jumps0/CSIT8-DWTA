@@ -44,6 +44,21 @@
   padding: 10px;
 }
 
+.notrackers-heading {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: rgb(255, 191, 191);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+  margin-bottom: 5px;
+}
+
 /* Container for centering */
 .visualization-container {
   display: flex;

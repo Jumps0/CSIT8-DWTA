@@ -101,6 +101,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Get container element
     const nodegraph = document.querySelector('.visualization-container');
     const piechart = document.querySelector('.piechart-container');
+    const notrackers = document.querySelector('.notrackers-container');
+
+    notrackers.style.display = 'none';
 
     if(variant > 3){ // Only visible on variants 4 & 5
       // Load and show visualization
@@ -1257,6 +1260,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           // Create the visualization
           createVisualization(filteredData);
           createPiechart(filteredData);
+        }
+        else{ // No trackers? Hide the visuals and show a message
+          nodegraph.style.display = 'none';
+          piechart.style.display = 'none';
+          notrackers.style.display = 'flex';
         }
       } catch (error) {
         console.error('Error:', error);
