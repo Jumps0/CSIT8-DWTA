@@ -206,15 +206,15 @@ a.removeOrigin:hover {
 }
 
 #learn-more-link a {
-    color: rgb(128, 236, 255);
+    color: rgb(0, 255, 106);
     font-weight: bold;
     text-decoration: underline;
     font-size: 16px;
     cursor: pointer;
 }
 
-#learn-more-link a:hover {
-    color: rgb(0, 0, 255);
+#learn-more-link a:hover { /* Hover */
+    color: rgb(255, 252, 86);
     text-decoration: underline;
 }
 

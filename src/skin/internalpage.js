@@ -1218,7 +1218,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
         {
           "url": "s.amazon-adsystem.com",
-          "group": "Amazon.com, Inc.",
+          "group": "Amazon",
           "info1": "Advertising and targeted marketing",
           "info2": "Advertising",
           "info3": "Amazon’s ad system domain for displaying and tracking ads across various websites.",
