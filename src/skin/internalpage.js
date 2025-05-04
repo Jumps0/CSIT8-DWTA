@@ -482,10 +482,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
         {
           "url": "geolocation.onetrust.com",
-          "group": "Onetrust",
+          "group": "OneTrust",
           "info1": "Geolocation-based content and ad targeting",
           "info2": "Consent Management",
-          "info3": "Onetrust is a Consent Management Platform (CMP). This tracker helps manage geolocation data for the purpose of presenting user-specific content and ads.",
+          "info3": "OneTrust is a Consent Management Platform (CMP). This tracker helps manage geolocation data for the purpose of presenting user-specific content and ads.",
           "info4": "Websites requiring location-based content delivery or ads"
         },
         {
