@@ -22,3 +22,7 @@ The first time installation page will appear after a few seconds.
 
 This codebase has been cloned from the PrivacyBadger extension's open-source codebase. The project will work to modify this extension with our changes for our research.
 https://github.com/EFForg/privacybadger
+
+### Paper
+You can read the paper written about this project here:
+[BadgerInfo++ A Layered-Explanation Extension for Web-Tracking Transparency.pdf](https://github.com/user-attachments/files/20400037/BadgerInfo%2B%2B.A.Layered-Explanation.Extension.for.Web-Tracking.Transparency.pdf)
